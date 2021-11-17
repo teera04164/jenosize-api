@@ -1,4 +1,3 @@
-const { game24Service } = require("../services")
 const { GameXO } = require("../utils/GameXO")
 
 const initial = async (req, res) => {
@@ -29,7 +28,6 @@ const clickBox = async (req, res) => {
         const result = await gameXo.movePosition(position)
         res.status(200).json(result)
     } catch (error) {
-        console.log("🚀 ~ file: gameXO.controller.js ~ line 32 ~ clickBox ~ error", error)
         return res.status(500).json({ error: 'Internal Server Error!' })
     }
 }
@@ -38,7 +36,7 @@ const reset = async (req, res) => {
     const { game_id } = req.params
     try {
         const gameXo = new GameXO(game_id)
-        const result = await gameXo.reset()
+        const result = gameXo.reset()
         res.status(200).json(result)
     } catch (error) {
         return res.status(500).json({ error: 'Internal Server Error!' })

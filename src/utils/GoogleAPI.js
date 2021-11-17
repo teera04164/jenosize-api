@@ -4,7 +4,7 @@ class GoogleAPI {
   language = "th";
   region = 'th'
   CONFIG = {
-    API_KEY: "AIzaSyBRZG407l3uDlrEZ5K7KU2nGH2c-LzDySE",
+    API_KEY: process.env.GOOGLE_API_KEY,
     URL_GOOGLE_API_PLACE: "https://maps.googleapis.com/maps/api/place",
   };
   key = this.CONFIG.API_KEY;

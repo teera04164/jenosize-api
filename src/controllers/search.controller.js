@@ -20,7 +20,18 @@ const detailRestaurant = async (req, res) => {
     }
 }
 
+const getPhotosByReference = async (req, res) => {
+    const { photo_reference } = req.query
+    try {
+        const result = await searchService.getPhotoRestaurant(photo_reference)
+        res.redirect(result);
+    } catch (error) {
+        return res.status(500).json({ error: 'Internal Server Error!' })
+    }
+}
+
 module.exports = {
     searchRestaurant,
     detailRestaurant,
+    getPhotosByReference
 }

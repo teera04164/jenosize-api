@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.get('/restaurant/search', searchValidator, searchController.searchRestaurant)
 router.get('/restaurant/detail', detailValidator, searchController.detailRestaurant)
+router.get('/restaurant/photo', searchController.getPhotosByReference)
 
 router.get('/game24', game24Validator, game24Controller.checkEque24)
 

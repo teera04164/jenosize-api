@@ -1,4 +1,5 @@
 const axios = require("axios");
+const { redisDB } = require("../db/redisDB");
 
 class GoogleAPI {
   language = "th";
@@ -21,27 +22,24 @@ class GoogleAPI {
   }
 
   async search(query) {
-    const { API_KEY } = this.CONFIG;
-    if (!API_KEY) {
-      return [];
-    }
-
     const params = { query, ...this.getDefaultParams() };
     const url = `${this.CONFIG.URL_GOOGLE_API_PLACE}/textsearch/json?${this.getQueryFromJson(params)}`;
     const result = await axios.get(url);
-    return result?.data?.results || [];
+    return result?.data;
+  }
+
+  async photo(photo_reference) {
+    const params = { photo_reference, ...this.getDefaultParams(), maxwidth: 400 };
+    const url = `${this.CONFIG.URL_GOOGLE_API_PLACE}/photo?${this.getQueryFromJson(params)}`;
+    const result = await axios.get(url);
+    return result
   }
 
   async detail(place_id) {
-    const { API_KEY } = this.CONFIG;
-    if (!API_KEY) {
-      return [];
-    }
-
     const params = { place_id, ...this.getDefaultParams() };
     const url = `${this.CONFIG.URL_GOOGLE_API_PLACE}/details/json?${this.getQueryFromJson(params)}`;
     const result = await axios.get(url);
-    return result?.data?.result || [];
+    return result?.data;
   }
 
   getQueryFromJson(params) {
@@ -55,5 +53,5 @@ class GoogleAPI {
 }
 
 module.exports = {
-  GoogleAPI,
+  GoogleAPI
 };

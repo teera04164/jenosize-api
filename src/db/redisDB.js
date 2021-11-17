@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const redis = require('redis');
 
-const EXPIRE_ONE_HOUR = 3600
+const EXPIRE_120_HOUR = 120 * 3600
 
 const client = redis.createClient({
     host: process.env.REDIS_HOST,
@@ -37,7 +37,7 @@ const set = (key, value) => {
     if (typeof result === "object" && value !== null) {
         result = JSON.stringify(value);
     }
-    client.set(key, result, 'EX', EXPIRE_ONE_HOUR);
+    client.set(key, result, 'EX', EXPIRE_120_HOUR);
     return 'done';
 }
 

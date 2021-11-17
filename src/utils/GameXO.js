@@ -82,6 +82,7 @@ class GameXO {
             this.save()
             return this.getDefaultData()
         }
+        return null
     }
 
     botMovePosition = (board) => {
